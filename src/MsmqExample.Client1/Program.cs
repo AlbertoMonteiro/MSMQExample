@@ -27,11 +27,8 @@ namespace MsmqExample.Client1
                 {
                     ColorConsole.WriteLine(inColor(string.Format("{0} - Carregando mensagens", workerName)));
                     var message = queue.Receive();
-                    {
-                        //queue.
-                        if (message != null)
-                            ColorConsole.WriteLine(inColor(string.Format("{0} - Received: {1}", workerName, message.Body)));
-                    }
+                    if (message != null)
+                        ColorConsole.WriteLine(inColor(string.Format("{0} - Received: {1}", workerName, message.Body)));
                     ColorConsole.WriteLine(inColor(string.Format("{0} - Tudo recebido", workerName)));
                     Thread.Sleep(800);
                 }
