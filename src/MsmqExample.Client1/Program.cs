@@ -17,22 +17,22 @@ namespace MsmqExample.Client1
             Console.ReadLine();
         }
 
-        private static void RunConsumer(Func<string, ColorToken> inRed, string workerName)
+        private static void RunConsumer(Func<string, ColorToken> inColor, string workerName)
         {
             Task.Run(() =>
             {
                 var queue = new MessageQueue(QUEUE_NAME) {Formatter = new XmlMessageFormatter(new[] {typeof (string)})};
-                ColorConsole.WriteLine(inRed(string.Format("{0} - Iniciado", workerName)));
+                ColorConsole.WriteLine(inColor(string.Format("{0} - Iniciado", workerName)));
                 while (true)
                 {
-                    ColorConsole.WriteLine(inRed(string.Format("{0} - Carregando mensagens", workerName)));
+                    ColorConsole.WriteLine(inColor(string.Format("{0} - Carregando mensagens", workerName)));
                     var message = queue.Receive();
                     {
                         //queue.
                         if (message != null)
-                            ColorConsole.WriteLine(inRed(string.Format("{0} - Received: {1}", workerName, message.Body)));
+                            ColorConsole.WriteLine(inColor(string.Format("{0} - Received: {1}", workerName, message.Body)));
                     }
-                    ColorConsole.WriteLine(inRed(string.Format("{0} - Tudo recebido", workerName)));
+                    ColorConsole.WriteLine(inColor(string.Format("{0} - Tudo recebido", workerName)));
                     Thread.Sleep(800);
                 }
             });
